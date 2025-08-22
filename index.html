@@ -1,348 +1,208 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rohan Kumar - My Journey</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
-    <!-- 
-    Chosen Palette: Warm Neutrals & Slate Blue
-    Application Structure Plan: A straightforward single-page portfolio with a top navigation for easy jumping between sections. The structure is designed to be simple and approachable, guiding visitors through an introduction, key projects, a quick overview of skills and certifications, a personal journey timeline, and finally, contact information. This linear yet navigable flow is ideal for a simple portfolio, allowing users to quickly grasp the main points without overwhelming detail.
-    Visualization & Content Choices: 
-    - Introduction: Simple text to introduce myself. Goal: Inform. Method: HTML/Tailwind.
-    - Projects: Interactive cards that flip to show basic project details. Goal: Engage & Inform. Method: HTML/Tailwind/JS.
-    - Skills: A horizontal bar chart for a quick visual of core programming skills. Goal: Compare. Method: Chart.js Canvas.
-    - Certifications: A clear grid layout for displaying earned certificates. Goal: Organize & Validate. Method: HTML/Tailwind.
-    - Journey Timeline: A vertical timeline to show educational milestones. Goal: Show Change. Method: HTML/Tailwind.
-    - Contact: Direct links for easy connection. Goal: Connect. Method: HTML/Tailwind.
-    CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. 
-    -->
-    <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #F8F7F4;
-            color: #333;
-        }
-        .nav-link {
-            transition: color 0.3s;
-        }
-        .nav-link:hover {
-            color: #4A90E2;
-        }
-        .flip-card {
-            perspective: 1000px;
-        }
-        .flip-card-inner {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            text-align: center;
-            transition: transform 0.8s;
-            transform-style: preserve-3d;
-        }
-        .flip-card.flipped .flip-card-inner {
-            transform: rotateY(180deg);
-        }
-        .flip-card-front, .flip-card-back {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            -webkit-backface-visibility: hidden;
-            backface-visibility: hidden;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 1rem;
-            border-radius: 0.75rem;
-            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-        }
-        .flip-card-front {
-             background-color: #ffffff;
-        }
-        .flip-card-back {
-            background-color: #4A90E2;
-            color: white;
-            transform: rotateY(180deg);
-        }
-        .timeline-item::before {
-            content: '';
-            position: absolute;
-            left: -31px;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            background-color: #4A90E2;
-            border: 4px solid #F8F7F4;
-        }
-        .chart-container {
-            position: relative;
-            width: 100%;
-            max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
-            height: 350px;
-            max-height: 400px;
-        }
-        @media (min-width: 768px) {
-            .chart-container {
-                height: 400px;
-            }
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rohan Kumar • Innovating Intelligence</title>
+  <meta name="description" content="Rohan Kumar — Portfolio. AI, Web, DSA. Projects in NLP, Computer Vision, and Full‑stack development." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root { color-scheme: dark; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; }
+    /* Glass card */
+    .glass { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.08); backdrop-filter: blur(10px); }
+    .shine { position: relative; overflow: hidden; }
+    .shine:before { content: ""; position: absolute; top: -120%; left: -120%; width: 240%; height: 240%; background: conic-gradient(from 180deg at 50% 50%, rgba(59,130,246,0.12), transparent 30%, rgba(99,102,241,0.12) 60%, transparent 75%); transform: rotate(0deg); animation: spin 18s linear infinite; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .section-title { letter-spacing: .04em; }
+  </style>
 </head>
-<body class="antialiased">
+<body class="bg-[#0a0f1e] text-slate-100">
+  <!-- NAVBAR -->
+  <header class="sticky top-0 z-50 bg-[#0a0f1e]/80 backdrop-blur border-b border-white/5">
+    <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+      <a href="#home" class="text-slate-200 font-semibold tracking-wide">Innovating <span class="text-indigo-400">Intelligence</span></a>
+      <nav class="hidden md:flex items-center gap-6 text-sm">
+        <a href="#foundations" class="hover:text-indigo-300">Academic Foundations</a>
+        <a href="#projects" class="hover:text-indigo-300">Projects</a>
+        <a href="#skills" class="hover:text-indigo-300">Skills</a>
+        <a href="#certs" class="hover:text-indigo-300">Certifications</a>
+        <a href="#contact" class="hover:text-indigo-300">Contact</a>
+      </nav>
+      <div class="flex items-center gap-2">
+        <a href="https://www.linkedin.com/in/rohankumar" target="_blank" rel="noopener" class="px-3 py-2 text-xs md:text-sm rounded-xl glass hover:bg-indigo-500/20 transition">LinkedIn</a>
+        <a href="mailto:2k22.csai.2212823@gmail.com?subject=Portfolio%20Inquiry&body=Hello%20Rohan%2C%20I%20saw%20your%20portfolio%20and..." class="px-3 py-2 text-xs md:text-sm rounded-xl bg-indigo-500/90 hover:bg-indigo-500 transition">Email</a>
+      </div>
+    </div>
+  </header>
 
-    <header class="bg-white/80 backdrop-blur-sm sticky top-0 z-50 shadow-sm">
-        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <div class="text-xl font-bold text-gray-800">Rohan Kumar</div>
-            <div class="hidden md:flex space-x-8">
-                <a href="#projects" class="nav-link text-gray-600 font-medium">Projects</a>
-                <a href="#skills" class="nav-link text-gray-600 font-medium">Skills & Certs</a>
-                <a href="#journey" class="nav-link text-gray-600 font-medium">My Journey</a>
-                <a href="#contact" class="nav-link text-gray-600 font-medium">Connect</a>
-            </div>
-            <button id="mobile-menu-button" class="md:hidden p-2 rounded-md">
-                <span class="block w-6 h-0.5 bg-gray-600 mb-1"></span>
-                <span class="block w-6 h-0.5 bg-gray-600 mb-1"></span>
-                <span class="block w-6 h-0.5 bg-gray-600"></span>
-            </button>
-        </nav>
-        <div id="mobile-menu" class="hidden md:hidden px-6 pb-4">
-            <a href="#projects" class="block py-2 nav-link text-gray-600 font-medium">Projects</a>
-            <a href="#skills" class="block py-2 nav-link text-gray-600 font-medium">Skills & Certs</a>
-            <a href="#journey" class="block py-2 nav-link text-gray-600 font-medium">My Journey</a>
-            <a href="#contact" class="block py-2 nav-link text-gray-600 font-medium">Connect</a>
+  <!-- HERO -->
+  <section id="home" class="relative overflow-hidden">
+    <div class="absolute inset-0 opacity-40">
+      <div class="shine w-full h-full"></div>
+    </div>
+    <div class="max-w-6xl mx-auto px-4 py-20 md:py-28 relative">
+      <div class="max-w-3xl">
+        <h1 class="text-3xl md:text-6xl font-extrabold leading-tight">Innovating Intelligence: <span class="text-indigo-400">Building the Future of AI</span></h1>
+        <p class="mt-5 text-slate-300 text-lg">AI & Full‑stack developer with expertise in machine learning, deep learning, and real‑world deployment. Passionate about crafting robust web apps and practical AI systems.</p>
+        <div class="mt-7 flex flex-wrap gap-3">
+          <a href="#projects" class="px-5 py-3 rounded-2xl bg-indigo-600 hover:bg-indigo-500 transition shadow">Explore Projects</a>
+          <a href="resume.pdf" class="px-5 py-3 rounded-2xl glass hover:bg-white/10 transition" target="_blank">View Resume (PDF)</a>
+          <a href="mailto:2k22.csai.2212823@gmail.com?subject=Interview%20Opportunity" class="px-5 py-3 rounded-2xl glass hover:bg-white/10 transition">Hire Me</a>
         </div>
-    </header>
+      </div>
+    </div>
+  </section>
 
-    <main class="container mx-auto px-6">
-        <section id="intro" class="text-center py-20 md:py-32">
-            <h1 class="text-4xl md:text-6xl font-bold text-gray-800 mb-4">Hi, I'm Rohan Kumar!</h1>
-            <p class="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
-                I am a B.Tech student in Computer Science and Engineering with a specialization in Artificial Intelligence at Pranveer Singh Institute of Technology, Kanpur. 
-                My passion lies in developing impactful solutions, as demonstrated by my work on projects like Real-Time Object Detection and an ongoing Image Classifier. 
-                I continuously expand my expertise through practical application of Data Structures & Algorithms in C++ and through various certifications in AI and programming.
-            </p>
-        </section>
+  <!-- ACADEMIC FOUNDATIONS -->
+  <section id="foundations" class="py-16 md:py-24">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 class="section-title text-indigo-300 text-sm font-semibold">ACADEMIC FOUNDATIONS</h2>
+      <h3 class="text-2xl md:text-3xl font-bold mt-2">Core Computer Science + AI</h3>
+      <div class="grid md:grid-cols-3 gap-5 mt-8">
+        <div class="glass rounded-2xl p-5">
+          <h4 class="font-semibold">B.Tech — CSE (AI), PSIT Kanpur (2022–2026)</h4>
+          <p class="text-slate-300 mt-2 text-sm">Specialization in AI & ML. Strong grounding in DSA, DBMS, OS, CN, OOP.</p>
+        </div>
+        <div class="glass rounded-2xl p-5">
+          <h4 class="font-semibold">Data Structures & Algorithms</h4>
+          <p class="text-slate-300 mt-2 text-sm">300+ problems: arrays, strings, hashing, two‑pointers, sliding window, prefix/suffix.</p>
+        </div>
+        <div class="glass rounded-2xl p-5">
+          <h4 class="font-semibold">Web + AI Stack</h4>
+          <p class="text-slate-300 mt-2 text-sm">React, Tailwind, Node, Express, MongoDB; Python ML with scikit‑learn, OpenCV, YOLO.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-        <section id="projects" class="py-16">
-             <div class="text-center mb-12">
-                <h2 class="text-3xl md:text-4xl font-bold text-gray-800">Cool Stuff I've Built</h2>
-                <p class="mt-4 text-lg text-gray-600">This section shows some of my hands-on projects. Each card gives a quick look at what I did; just tap or click to see more details about the tech involved!</p>
-            </div>
-            <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-                <div class="flip-card h-64 cursor-pointer" onclick="this.classList.toggle('flipped')">
-                    <div class="flip-card-inner">
-                        <div class="flip-card-front">
-                             <h3 class="text-2xl font-bold mb-2">Real-Time Object Detection</h3>
-                             <p class="text-gray-600">Click to see details</p>
-                        </div>
-                        <div class="flip-card-back">
-                             <h4 class="text-xl font-bold mb-2">Tech Used</h4>
-                             <ul class="text-left text-sm space-y-1">
-                                <li>- OpenCV</li>
-                                <li>- YOLO</li>
-                                <li>- NVIDIA GPU</li>
-                                <li>- CUDA & TensorRT</li>
-                             </ul>
-                             <p class="text-xs mt-4 font-light">Learned a lot about computer vision and making things run fast!</p>
-                        </div>
-                    </div>
-                </div>
-                 <div class="flip-card h-64 cursor-pointer" onclick="this.classList.toggle('flipped')">
-                    <div class="flip-card-inner">
-                        <div class="flip-card-front">
-                             <h3 class="text-2xl font-bold mb-2">Image Classifier (CNN)</h3>
-                             <p class="text-gray-500 font-medium">[Still Working On It]</p>
-                             <p class="text-gray-600 mt-2">Click to see details</p>
-                        </div>
-                        <div class="flip-card-back">
-                             <h4 class="text-xl font-bold mb-2">My Approach</h4>
-                             <ul class="text-left text-sm space-y-1">
-                                <li>- Using Convolutional Neural Networks (CNN)</li>
-                                <li>- Working with the Cifar-Dataset</li>
-                             </ul>
-                             <p class="text-xs mt-4 font-light">Getting deeper into how neural networks understand images.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        
-        <section id="skills" class="py-16 bg-white rounded-xl shadow-lg my-16">
-            <div class="text-center mb-12 px-4">
-                <h2 class="text-3xl md:text-4xl font-bold text-gray-800">My Skills & Certificates</h2>
-                <p class="mt-4 text-lg text-gray-600 max-w-4xl mx-auto">This section gives a quick look at my skills and the certifications I've earned. The chart shows my abilities in different programming areas, and below it, you'll find my certificates. It's all about showing what I've learned and achieved.</p>
-            </div>
+  <!-- PROJECTS -->
+  <section id="projects" class="py-16 md:py-24 bg-white/5">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 class="section-title text-indigo-300 text-sm font-semibold">REAL‑WORLD AI SOLUTIONS • FEATURED PROJECTS</h2>
+      <h3 class="text-2xl md:text-3xl font-bold mt-2">Selected Work</h3>
 
-            <div class="chart-container px-4">
-                <canvas id="skillsChart"></canvas>
-            </div>
+      <div class="grid lg:grid-cols-3 gap-6 mt-8">
+        <!-- Project 1 -->
+        <article class="glass rounded-2xl p-6 flex flex-col">
+          <div class="text-sm text-indigo-300">NLP • Python • scikit‑learn</div>
+          <h4 class="mt-1 font-semibold text-xl">Spam/Ham SMS Classifier</h4>
+          <ul class="mt-3 space-y-2 text-sm text-slate-300 list-disc list-inside">
+            <li>Preprocessed 5k+ messages (tokenization, stopwords, TF‑IDF).</li>
+            <li>Naive Bayes & Logistic Regression → <span class="font-semibold">96% accuracy</span>.</li>
+            <li>CLI for quick inference on custom input.</li>
+          </ul>
+          <div class="mt-4 flex gap-2">
+            <a href="#" class="px-3 py-2 rounded-xl glass hover:bg-white/10 text-sm">Code</a>
+            <a href="#" class="px-3 py-2 rounded-xl glass hover:bg-white/10 text-sm">Demo</a>
+          </div>
+        </article>
 
-             <div class="mt-20">
-                <h3 class="text-center text-2xl font-bold text-gray-800 mb-8">My Certificates</h3>
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto px-4">
-                    <div class="bg-gray-50 p-6 rounded-lg text-center border border-gray-200">
-                        <h4 class="font-bold text-lg text-gray-800">AI Fundamentals</h4>
-                        <p class="text-sm text-gray-600">IBM SkillsBuild</p>
-                    </div>
-                     <div class="bg-gray-50 p-6 rounded-lg text-center border border-gray-200">
-                        <h4 class="font-bold text-lg text-gray-800">Certified in AI</h4>
-                        <p class="text-sm text-gray-600">Acmegrade Corporate Training</p>
-                    </div>
-                     <div class="bg-gray-50 p-6 rounded-lg text-center border border-gray-200">
-                        <h4 class="font-bold text-lg text-gray-800">Python & HTML</h4>
-                        <p class="text-sm text-gray-600">Infosys Springboard</p>
-                    </div>
-                     <div class="bg-gray-50 p-6 rounded-lg text-center border border-gray-200">
-                        <h4 class="font-bold text-lg text-gray-800">Agentblazer Champion</h4>
-                        <p class="text-sm text-gray-600">Salesforce Trailhead</p>
-                    </div>
-                </div>
-            </div>
-        </section>
+        <!-- Project 2 -->
+        <article class="glass rounded-2xl p-6 flex flex-col">
+          <div class="text-sm text-indigo-300">Vision • Python • OpenCV • YOLOv5</div>
+          <h4 class="mt-1 font-semibold text-xl">Realtime Object Detection</h4>
+          <ul class="mt-3 space-y-2 text-sm text-slate-300 list-disc list-inside">
+            <li>Pretrained YOLO; real‑time webcam inference via OpenCV.</li>
+            <li>Optimized pipeline for smoother FPS; annotated frame export.</li>
+            <li>Clear, reproducible setup & usage guide.</li>
+          </ul>
+          <div class="mt-4 flex gap-2">
+            <a href="#" class="px-3 py-2 rounded-xl glass hover:bg-white/10 text-sm">Code</a>
+            <a href="#" class="px-3 py-2 rounded-xl glass hover:bg-white/10 text-sm">Demo</a>
+          </div>
+        </article>
 
-        <section id="journey" class="py-16">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-4xl font-bold text-gray-800">Where I've Been & What I'm Doing</h2>
-                <p class="mt-4 text-lg text-gray-600 max-w-4xl mx-auto">This timeline shows my education path and some cool things I've done along the way. It's a quick look at my journey so far!</p>
-            </div>
-            <div class="relative max-w-2xl mx-auto pl-8 border-l-2 border-gray-200">
-                <div class="mb-12 relative timeline-item">
-                    <h4 class="text-xl font-bold text-gray-800">B.Tech in Computer Science & AI</h4>
-                    <p class="text-md text-gray-600">Pranveer Singh Institute of Technology, Kanpur</p>
-                    <p class="text-sm text-gray-500">2022 - 2026</p>
-                    <p class="text-sm text-gray-500 mt-2">Key Courses: Data Structures & Algorithms, Artificial Intelligence, Operating System</p>
-                </div>
-                <div class="mb-12 relative timeline-item">
-                    <h4 class="text-xl font-bold text-gray-800">Acmegrade AI Training & Internship</h4>
-                    <p class="text-md text-gray-600">Completed corporate training and an internship, developing a spam and ham classification file.</p>
-                    <p class="text-sm text-gray-500">2024</p>
-                </div>
-                <div class="mb-12 relative timeline-item">
-                    <h4 class="text-xl font-bold text-gray-800">Naukari(Code-360) Grand Master League</h4>
-                    <p class="text-md text-gray-600">Successfully solved over 200 problems on Naukari-Code360,Leetcode.</p>
-                    <p class="text-sm text-gray-500">2025</p>
-                     <p class="text-sm text-gray-500 mt-2">Programming Language: C++</p>
-                </div>
-                <div class="mb-12 relative timeline-item">
-                    <h4 class="text-xl font-bold text-gray-800">Senior Secondary Education</h4>
-                    <p class="text-md text-gray-600">CBSE Board - 81.0%</p>
-                    <p class="text-sm text-gray-500">2021</p>
-                </div>
-                 <div class="mb-12 relative timeline-item">
-                    <h4 class="text-xl font-bold text-gray-800">Secondary Education</h4>
-                    <p class="text-md text-gray-600">CBSE Board - 88.83%</p>
-                    <p class="text-sm text-gray-500">2019</p>
-                </div>
-            </div>
-        </section>
+        <!-- Project 3 -->
+        <article class="glass rounded-2xl p-6 flex flex-col">
+          <div class="text-sm text-indigo-300">Full‑stack • React • Node • MongoDB</div>
+          <h4 class="mt-1 font-semibold text-xl">PetaPay — Fintech Dashboard</h4>
+          <ul class="mt-3 space-y-2 text-sm text-slate-300 list-disc list-inside">
+            <li>JWT‑protected routes; modular REST APIs for users/transactions.</li>
+            <li>Charts, filters, server‑side search; clean UX with Tailwind.</li>
+            <li>Deployed client & server with environment‑based config.</li>
+          </ul>
+          <div class="mt-4 flex gap-2">
+            <a href="#" class="px-3 py-2 rounded-xl glass hover:bg-white/10 text-sm">Code</a>
+            <a href="#" class="px-3 py-2 rounded-xl glass hover:bg-white/10 text-sm">Live</a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
 
-        <section id="contact" class="text-center py-20">
-             <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Let's Connect!</h2>
-             <p class="text-lg text-gray-600 mb-8">I'm always excited to learn new things and work on interesting projects. <br>Feel free to get in touch!</p>
-             <div class="flex justify-center items-center space-x-6">
-                <a href="https://linkedin.com/in/rohan-kumar-807980207" target="_blank" class="text-gray-600 hover:text-[#4A90E2] transition duration-300">
-                    <span class="sr-only">LinkedIn</span>
-                    <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
-                </a>
-                 <a href="mailto:rg628792@gmail.com" class="text-gray-600 hover:text-[#4A90E2] transition duration-300">
-                    <span class="sr-only">Email</span>
-                    <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M22 6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6zm-2 0l-8 5-8-5h16zm0 12H4V8l8 5 8-5v10z"/></svg>
-                </a>
-             </div>
-        </section>
-    </main>
-    
-    <footer class="text-center py-6 border-t border-gray-200">
-        <p class="text-sm text-gray-500">&copy; 2025 Rohan Kumar. All Rights Reserved.</p>
-    </footer>
+  <!-- SKILLS -->
+  <section id="skills" class="py-16 md:py-24">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 class="section-title text-indigo-300 text-sm font-semibold">SKILLS & TOOLS</h2>
+      <h3 class="text-2xl md:text-3xl font-bold mt-2">Tech I Use</h3>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const mobileMenuButton = document.getElementById('mobile-menu-button');
-            const mobileMenu = document.getElementById('mobile-menu');
-            
-            mobileMenuButton.addEventListener('click', function() {
-                mobileMenu.classList.toggle('hidden');
-            });
+      <div class="grid md:grid-cols-2 gap-6 mt-8">
+        <div class="glass rounded-2xl p-6">
+          <h4 class="font-semibold">Languages</h4>
+          <p class="text-slate-300 text-sm mt-2">C++, Python, JavaScript (ES6+), SQL</p>
+          <h4 class="font-semibold mt-4">Frontend</h4>
+          <p class="text-slate-300 text-sm mt-2">HTML5, CSS3, Tailwind, React, Vite, Router</p>
+          <h4 class="font-semibold mt-4">Backend</h4>
+          <p class="text-slate-300 text-sm mt-2">Node.js, Express.js, REST APIs, JWT, Multer</p>
+        </div>
+        <div class="glass rounded-2xl p-6">
+          <h4 class="font-semibold">Database</h4>
+          <p class="text-slate-300 text-sm mt-2">MongoDB, Mongoose, Atlas</p>
+          <h4 class="font-semibold mt-4">CS Core</h4>
+          <p class="text-slate-300 text-sm mt-2">DSA, OOP, DBMS, OS, CN</p>
+          <h4 class="font-semibold mt-4">Tools</h4>
+          <p class="text-slate-300 text-sm mt-2">Git, GitHub, Postman, VS Code, Linux</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-            document.querySelectorAll('.nav-link').forEach(link => {
-                link.addEventListener('click', () => {
-                    if (!mobileMenu.classList.contains('hidden')) {
-                         mobileMenu.classList.add('hidden');
-                    }
-                });
-            });
+  <!-- CERTIFICATIONS -->
+  <section id="certs" class="py-16 md:py-24 bg-white/5">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 class="section-title text-indigo-300 text-sm font-semibold">CERTIFICATIONS</h2>
+      <h3 class="text-2xl md:text-3xl font-bold mt-2">Learning & Credentials</h3>
+      <div class="grid md:grid-cols-3 gap-6 mt-8">
+        <div class="glass rounded-2xl p-6">
+          <h4 class="font-semibold">Python Programming</h4>
+          <p class="text-slate-300 text-sm mt-2">Infosys Springboard (2024)</p>
+        </div>
+        <div class="glass rounded-2xl p-6">
+          <h4 class="font-semibold">Web Development Foundations</h4>
+          <p class="text-slate-300 text-sm mt-2">Infosys Springboard (2024)</p>
+        </div>
+        <div class="glass rounded-2xl p-6">
+          <h4 class="font-semibold">Git & GitHub Essentials</h4>
+          <p class="text-slate-300 text-sm mt-2">Project‑based self‑study</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-            const skillsData = {
-                labels: ['C++', 'Python', 'SQL', 'JavaScript'],
-                datasets: [{
-                    label: 'Proficiency',
-                    data: [90, 85, 75, 80],
-                    backgroundColor: 'rgba(74, 144, 226, 0.6)',
-                    borderColor: 'rgba(74, 144, 226, 1)',
-                    borderWidth: 1
-                }]
-            };
+  <!-- CONTACT -->
+  <footer id="contact" class="py-16">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="glass rounded-2xl p-8 md:p-10">
+        <h3 class="text-2xl md:text-3xl font-bold">Let’s build something meaningful.</h3>
+        <p class="text-slate-300 mt-2">Open to SDE/ML/Full‑stack roles and internships. Based in India; remote‑friendly.</p>
+        <div class="mt-6 flex flex-wrap gap-3">
+          <a href="mailto:2k22.csai.2212823@gmail.com?subject=Portfolio%20Inquiry" class="px-5 py-3 rounded-2xl bg-indigo-600 hover:bg-indigo-500 transition">Email Me</a>
+          <a href="https://www.linkedin.com/in/rohankumar" target="_blank" rel="noopener" class="px-5 py-3 rounded-2xl glass hover:bg-white/10">LinkedIn</a>
+          <a href="https://github.com/rohan-kumar" target="_blank" rel="noopener" class="px-5 py-3 rounded-2xl glass hover:bg-white/10">GitHub</a>
+          <a href="resume.pdf" target="_blank" class="px-5 py-3 rounded-2xl glass hover:bg-white/10">Download Resume</a>
+        </div>
+        <p class="text-xs text-slate-400 mt-6">© <span id="y"></span> Rohan Kumar • Innovating Intelligence</p>
+      </div>
+    </div>
+  </footer>
 
-            const skillsConfig = {
-                type: 'bar',
-                data: skillsData,
-                options: {
-                    indexAxis: 'y',
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: {
-                            display: false
-                        },
-                        tooltip: {
-                            callbacks: {
-                                label: function(context) {
-                                    let label = context.dataset.label || '';
-                                    if (label) {
-                                        label += ': ';
-                                    }
-                                    if (context.parsed.x !== null) {
-                                        label += context.parsed.x + '%';
-                                    }
-                                    return label;
-                                }
-                            }
-                        }
-                    },
-                    scales: {
-                        x: {
-                            beginAtZero: true,
-                            max: 100,
-                             ticks: {
-                                callback: function(value) {
-                                    return value + "%"
-                                }
-                            }
-                        },
-                        y: {
-                           ticks: {
-                               font: {
-                                   size: 12
-                               }
-                           }
-                        }
-                    }
-                }
-            };
-
-            const skillsChartCtx = document.getElementById('skillsChart').getContext('2d');
-            new Chart(skillsChartCtx, skillsConfig);
-        });
-    </script>
+  <script>
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
